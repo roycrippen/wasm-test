@@ -1,0 +1,10 @@
+[package]
+name = "wasm-test"
+version = "0.1.0"
+authors = ["roycrippen <roycrippen@gmail.com>"]
+
+[dependencies]
+
+[lib]
+crate-type = ["cdylib"]
+
