@@ -1,18 +1,21 @@
-import loadRust from './lib.rs'
+import loadRust from './lib.rs';
 
-const now = require("performance-now")
+const now = require('performance-now');
 
-loadRust().then(result => {
-  // const add = result.instance.exports['add'];
-  // console.log('add(2, 3) = ', add(2, 3));
+let rust;
 
-  // const solve = result.instance.exports['solve'];
-  // console.log('p006 = ', solve(1000));
+function process() {
+  const t0 = now();
+  const solveRes = rust.solve(100);
+  const sum = rust.run(100000);
+  const t1 = now();
+  console.log(`p006 = ${solveRes}`);
+  console.log(`res = ${sum}`);
+  console.log(`time = ${t1 - t0} milliseconds.\n`);
+}
 
-  const run = result.instance.exports['run'];
-  var t0 = now();
-  var sum = run(10000);
-  var t1 = now();
-  console.log("\n Sum = " + sum + " time = " + (t1 - t0) + " milliseconds.")
-
+loadRust().then((result) => {
+  rust = result.instance.exports;
+  process();
 });
+
